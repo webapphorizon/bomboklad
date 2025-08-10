@@ -4,16 +4,23 @@ import Lottie from "lottie-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
+import type { CellState, CellType } from "~/lib/game";
 
 type BombAnimation = Record<string, unknown>;
 
 interface CustomGameButtonProps {
-  onClick: (result: "bomb" | "coin") => void;
+  type: CellType;
+  state: CellState;
+  onReveal: () => void;
+  onToggleFlag: () => void;
 }
 
-export default function CustomGameButton({ onClick }: CustomGameButtonProps) {
-  const [isShown, setIsShown] = useState(false);
-  const [choice, setChoice] = useState<"bomb" | "coin" | null>(null);
+export default function CustomGameButton({
+  type,
+  state,
+  onReveal,
+  onToggleFlag,
+}: CustomGameButtonProps) {
   const [bombData, setBombData] = useState<BombAnimation | null>(null);
 
   useEffect(() => {
@@ -30,39 +37,35 @@ export default function CustomGameButton({ onClick }: CustomGameButtonProps) {
   }, []);
 
   const handleClick = () => {
-    if (!isShown) {
-      const canShowBomb = Boolean(bombData);
-      const available: Array<"bomb" | "coin"> = canShowBomb
-        ? ["bomb", "coin"]
-        : ["coin"];
-      const idx = Math.floor(Math.random() * available.length);
-      const selected: "bomb" | "coin" = available[idx] ?? "coin";
-      setChoice(selected);
-      setIsShown(true);
-      onClick(selected);
-      return;
-    }
-    if (choice === "bomb" || choice === "coin") onClick(choice);
+    if (state === `hidden` || state === `flagged`) onReveal();
+  };
+
+  const handleContextMenu: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    if (state !== `revealed`) onToggleFlag();
   };
 
   return (
     <Button
-      className={`flex h-20 w-20 items-center justify-center bg-primary-foreground`}
+      className={`bg-primary-foreground relative flex h-20 w-20 items-center justify-center`}
       onClick={handleClick}
+      onContextMenu={handleContextMenu}
+      disabled={state === `revealed`}
     >
-      <div className={isShown ? `block` : `hidden`}>
-        {choice === `coin` && (
-          <Image src={`/coin2.png`} alt={`coin`} width={38} height={38} />
-        )}
-        {choice === `bomb` && bombData && (
-          <Lottie
-            animationData={bombData}
-            loop
-            autoplay
-            style={{ width: 42, height: 42 }}
-          />
-        )}
-      </div>
+      {state === `flagged` && (
+        <span className={`absolute top-1 right-1 text-lg`}>🚩</span>
+      )}
+      {state === `revealed` && type === `coin` && (
+        <Image src={`/coin2.png`} alt={`coin`} width={38} height={38} />
+      )}
+      {state === `revealed` && type === `bomb` && bombData && (
+        <Lottie
+          animationData={bombData}
+          loop
+          autoplay
+          style={{ width: 42, height: 42 }}
+        />
+      )}
     </Button>
   );
 }
