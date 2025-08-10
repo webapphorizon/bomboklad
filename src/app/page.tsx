@@ -7,9 +7,11 @@ import { Slider} from "~/components/ui/slider";
 export default function HomePage() {
   return (
     <main
-      className={`flex  flex-col items-center justify-center gap-10 p-4 text-white`}
+      className={`flex min-h-screen flex-col items-center justify-center gap-10 p-4 text-white`}
     >
-      <Button>add money</Button>
+      <div>
+        <h1 className="text-3xl font-medium">Balance: 100$</h1>
+      </div>
       <GameGrid />
       <div className="flex w-full flex-col gap-2">
         <div className="flex">
@@ -17,7 +19,11 @@ export default function HomePage() {
           <span className="pl-2">{4}</span>
         </div>
         <Slider />
+        <div>
+          <p>you can x4 your bet</p>
+        </div>
       </div>
+      <Button className="h-16 w-32 text-3xl font-bold uppercase">bet</Button>
     </main>
   );
 }
