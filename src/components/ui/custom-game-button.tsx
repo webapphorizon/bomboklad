@@ -47,7 +47,7 @@ export default function CustomGameButton({ onClick }: CustomGameButtonProps) {
 
   return (
     <Button
-      className={`flex h-14 w-14 items-center justify-center`}
+      className={`flex h-20 w-20 items-center justify-center`}
       onClick={handleClick}
     >
       <div className={isShown ? `block` : `hidden`}>
@@ -59,7 +59,7 @@ export default function CustomGameButton({ onClick }: CustomGameButtonProps) {
             animationData={bombData}
             loop
             autoplay
-            style={{ width: 32, height: 32 }}
+            style={{ width: 42, height: 42 }}
           />
         )}
       </div>
