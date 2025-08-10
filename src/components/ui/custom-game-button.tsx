@@ -47,7 +47,7 @@ export default function CustomGameButton({ onClick }: CustomGameButtonProps) {
 
   return (
     <Button
-      className={`flex h-20 w-20 items-center justify-center`}
+      className={`flex h-20 w-20 items-center justify-center bg-primary-foreground`}
       onClick={handleClick}
     >
       <div className={isShown ? `block` : `hidden`}>

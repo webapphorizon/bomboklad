@@ -1,95 +1,22 @@
 "use client";
 
-import CustomGameButton from "~/components/ui/custom-game-button";
+import GameGrid from "~/components/block/game-grid";
+import { Button } from "~/components/ui/button";
+import { Slider} from "~/components/ui/slider";
 
 export default function HomePage() {
   return (
     <main
-      className={`flex min-h-screen items-center justify-center text-white bg-gradient-to-b from-[#341f52] to-[#15162c]`}
+      className={`flex  flex-col items-center justify-center gap-10 p-4 text-white`}
     >
-      <div className="grid grid-cols-4 gap-4">
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />{" "}
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />{" "}
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />{" "}
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />{" "}
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />{" "}
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />{" "}
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />{" "}
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />
-        <CustomGameButton
-          onClick={(result: "bomb" | "coin") => {
-            console.log(result);
-          }}
-        />{" "}
-
-
+      <Button>add money</Button>
+      <GameGrid />
+      <div className="flex w-full flex-col gap-2">
+        <div className="flex">
+          <p>number of bombs:</p>
+          <span className="pl-2">{4}</span>
+        </div>
+        <Slider />
       </div>
     </main>
   );
