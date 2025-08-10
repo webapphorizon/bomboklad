@@ -7,7 +7,7 @@ import { Slider} from "~/components/ui/slider";
 export default function HomePage() {
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-center gap-10 p-4 text-white`}
+      className={`flex min-h-screen flex-col items-center justify-center gap-4 p-4 text-white`}
     >
       <div>
         <h1 className="text-3xl font-medium">Balance: 100$</h1>
