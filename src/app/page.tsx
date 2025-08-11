@@ -12,12 +12,15 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { Input } from "~/components/ui/input";
+import { connectMetaMask, shortenAddress } from "~/lib/wallet";
 
 export default function HomePage() {
   const [balance, setBalance] = useState<number>(100);
   const [betAmount, setBetAmount] = useState<number>(0);
   const [inRound, setInRound] = useState<boolean>(false);
   const [gameId, setGameId] = useState<number>(0);
+  const [walletAddress, setWalletAddress] = useState<string | null>(null);
+  const [connecting, setConnecting] = useState<boolean>(false);
 
   const canBet = useMemo(
     () => !inRound && betAmount > 0 && betAmount <= balance,
@@ -41,14 +44,40 @@ export default function HomePage() {
     [betAmount],
   );
 
+  const handleConnectWallet = useCallback(async () => {
+    try {
+      setConnecting(true);
+      const { address } = await connectMetaMask();
+      setWalletAddress(address);
+    } catch (err) {
+      console.error(err);
+      alert(
+        err instanceof Error
+          ? err.message
+          : `Failed to connect wallet. Ensure MetaMask is installed.`,
+      );
+    } finally {
+      setConnecting(false);
+    }
+  }, []);
+
   return (
     <main
       className={`flex max-h-screen flex-col items-center justify-center gap-4 p-4 text-white`}
     >
       <div className="flex w-full justify-between">
         <h1 className="text-3xl font-medium">Balance: {balance}$</h1>
-        <Button className="border-primary text-primary border bg-transparent">
-          wallet
+        <Button
+          className="border-primary text-primary border bg-transparent"
+          onClick={handleConnectWallet}
+          disabled={connecting}
+          title={walletAddress ?? "Connect MetaMask"}
+        >
+          {connecting
+            ? "connecting..."
+            : walletAddress
+              ? shortenAddress(walletAddress)
+              : "wallet"}
         </Button>
       </div>
       <GameGrid gameId={gameId} onGameEnd={handleGameEnd} />
