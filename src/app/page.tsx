@@ -48,7 +48,7 @@ export default function HomePage() {
       <div className="flex w-full justify-between">
         <h1 className="text-3xl font-medium">Balance: {balance}$</h1>
         <Button className="border-primary text-primary border bg-transparent">
-          add balance
+          wallet
         </Button>
       </div>
       <GameGrid gameId={gameId} onGameEnd={handleGameEnd} />
@@ -103,9 +103,9 @@ export default function HomePage() {
                   <li>Lose: if you reveal the bomb, the bet is lost.</li>
                   <li>You cannot change the bet while the round is active.</li>
                 </ul>
-                <p className="text-muted-foreground text-sm">
+                <span className="text-muted-foreground text-sm">
                   Tip: use flags to avoid tapping suspected bombs.
-                </p>
+                </span>
               </div>
             </DialogDescription>
           </DialogHeader>
