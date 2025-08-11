@@ -50,7 +50,7 @@ export default function CustomGameButton({
           scale: 1,
           opacity: 1,
           rotate: 0,
-          duration: 0.2,
+          duration: 0.4,
           ease: `back.out(1.7)`,
         },
       );
@@ -61,7 +61,7 @@ export default function CustomGameButton({
       tl.fromTo(
         bombRef.current,
         { scale: 0.2, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.2, ease: `back.out(2)` },
+        { scale: 1, opacity: 1, duration: 0.4, ease: `back.out(2)` },
       )
         .to(bombRef.current, {
           rotate: -8,
@@ -70,7 +70,7 @@ export default function CustomGameButton({
           repeat: 5,
           ease: `sine.inOut`,
         })
-        .to(bombRef.current, { rotate: 0, duration: 0.1 });
+        .to(bombRef.current, { rotate: 0, duration: 0.4 });
     }
   }, [state, type]);
 
