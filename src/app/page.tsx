@@ -63,7 +63,7 @@ export default function HomePage() {
 
   return (
     <main
-      className={`flex max-h-screen flex-col items-center justify-center gap-4 p-4 text-white`}
+      className={`flex max-h-screen flex-col items-center justify-center gap-4 p-4 text-white max-w-[25rem] m-auto pt-0 md:pt-40`}
     >
       <div className="flex w-full justify-between">
         <h1 className="text-3xl font-medium">Balance: {balance}$</h1>

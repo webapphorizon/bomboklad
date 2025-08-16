@@ -25,6 +25,8 @@ export default function CustomGameButton({
   const [bombData, setBombData] = useState<BombAnimation | null>(null);
   const coinRef = useRef<HTMLDivElement | null>(null);
   const bombRef = useRef<HTMLDivElement | null>(null);
+  const coinSoundRef = useRef<HTMLAudioElement | null>(null);
+  const fuseSoundRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     void (async () => {
@@ -54,6 +56,7 @@ export default function CustomGameButton({
           ease: `back.out(1.7)`,
         },
       );
+      void coinSoundRef.current?.play();
     }
 
     if (type === `bomb` && bombRef.current) {
@@ -71,6 +74,11 @@ export default function CustomGameButton({
           ease: `sine.inOut`,
         })
         .to(bombRef.current, { rotate: 0, duration: 0.4 });
+
+      if (fuseSoundRef.current) {
+        void fuseSoundRef.current.play();
+        const currentFuseSound = fuseSoundRef.current;
+      }
     }
   }, [state, type]);
 
@@ -113,6 +121,12 @@ export default function CustomGameButton({
           </div>
         )}
       </Button>
+      <audio ref={coinSoundRef} src={`/sound/coin_hit.wav`} preload={`auto`} />
+      <audio
+        ref={fuseSoundRef}
+        src={`/sound/fuse_short.wav`}
+        preload={`auto`}
+      />
     </div>
   );
 }
